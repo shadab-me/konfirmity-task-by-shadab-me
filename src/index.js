@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import "/home/shadab/Documents/interview-task/interview-task/src/stylesheets/application.scss";
 
 ReactDOM.render(
   <React.StrictMode>
