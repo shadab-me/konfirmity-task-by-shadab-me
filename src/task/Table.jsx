@@ -1,5 +1,7 @@
+import React from "react";
+
 const Table = ({}) => {
-  return <h1 className="bg-blue-900">This si Nrew</h1>;
+  return <h1 className="p-5">This si New</h1>;
 };
 
 export default Table;
