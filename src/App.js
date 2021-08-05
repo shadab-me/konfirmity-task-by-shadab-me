@@ -31,7 +31,7 @@ function App() {
     fetchTransactions();
   }, []);
 
-  if (!transactionsData.length) {
+  if (!transactionsData.length && !holdings.length) {
     return <Loader />;
   }
 
@@ -40,7 +40,7 @@ function App() {
       <Header />
       <Controller setActive={setActive} />
       {active === "holdings" ? (
-        <Holdings holdings = {holdings} />
+        <Holdings holdings={holdings} />
       ) : (
         <Transactions transactions={transactionsData} />
       )}
