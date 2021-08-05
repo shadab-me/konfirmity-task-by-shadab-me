@@ -21,8 +21,8 @@ function App() {
   const fetchHoldings = async () => {
     let data = await fetch("https://canopy-frontend-task.now.sh/api/holdings");
     let { payload } = await data.json();
-    console.log(payload);
-    setHoldings(payload);
+    let holdingsData = payload.filter((holding) => holding.market_price);
+    setHoldings(holdingsData);
   };
   <Holdings transactions={holdings} />;
 
@@ -40,7 +40,7 @@ function App() {
       <Header />
       <Controller setActive={setActive} />
       {active === "holdings" ? (
-        <Holdings transactions={holdings} />
+        <Holdings holdings = {holdings} />
       ) : (
         <Transactions transactions={transactionsData} />
       )}

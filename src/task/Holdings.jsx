@@ -10,8 +10,8 @@ import {
   useResizeColumns,
 } from "react-table";
 
-export default function Holdings({ transactions }) {
-  const data = React.useMemo(() => transactions.sort((a, b) => a - b), []);
+export default function Holdings({ holdings }) {
+  const data = React.useMemo(() => holdings, []);
 
   const columns = React.useMemo(
     () => [
@@ -31,10 +31,24 @@ export default function Holdings({ transactions }) {
       {
         Header: "Average Price",
         accessor: "avg_price",
+        Cell: ({ value }) => {
+          if (!parseInt(value)) {
+            return "Not Available";
+          } else {
+            return parseInt(value);
+          }
+        },
       },
       {
         Header: "Market Price",
-        accessor: "market-price",
+        accessor: "market_price",
+        Cell: ({ value }) => {
+          if (!parseInt(value)) {
+            return "Not Available";
+          } else {
+            return parseInt(value);
+          }
+        },
       },
       {
         Header: "PC",
@@ -115,8 +129,7 @@ export default function Holdings({ transactions }) {
                 {headerGroup.headers.map((column) => (
                   <th
                     {...column.getHeaderProps(column.getSortByToggleProps())}
-                    className="bg-dark border-0 text-white"
-                    scope="col"
+                    className="bg-dark border-0 text-white  w-25"
                   >
                     {column.render("Header")}
                     <div
