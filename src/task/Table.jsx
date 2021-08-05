@@ -94,55 +94,68 @@ export default function Table({ transactions }) {
   return (
     <Styles>
       <div className="container mt-4">
-        <button className="btn btn-primary mb-2" onClick={() => changeOrder()}>
-          Recorder
-        </button>
-        <table {...getTableProps()} className="table">
-          <thead>
-            {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <th
-                    {...column.getHeaderProps(column.getSortByToggleProps())}
-                    className="bg-dark border-0 text-white"
-                  >
-                    {column.render("Header")}
-                    <div
-                      {...column.getResizerProps()}
-                      className={
-                        `resizer ${column.isResizing ? "isResizing" : ""}` +
-                        "bg-blue-700"
-                      }
-                    />
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
-            {page.map((row) => {
-              prepareRow(row);
-              return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return (
-                      <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
-          <button className="btn-md btn-primary" onClick={() => previousPage()}>
-            Previous
-          </button>
+        <div className="row flex">
           <button
-            className="btn-md btn-primary ml-2"
-            onClick={() => nextPage()}
+            className="btn btn-primary mb-2"
+            onClick={() => changeOrder()}
+            style={{ marginLeft: "220px" }}
           >
-            Next
+            Recorder
           </button>
-        </table>
+          <table
+            {...getTableProps()}
+            className="table"
+            style={{ marginLeft: "220px" }}
+          >
+            <thead>
+              {headerGroups.map((headerGroup) => (
+                <tr {...headerGroup.getHeaderGroupProps()}>
+                  {headerGroup.headers.map((column) => (
+                    <th
+                      {...column.getHeaderProps(column.getSortByToggleProps())}
+                      className="bg-dark border-0 text-white"
+                    >
+                      {column.render("Header")}
+                      <div
+                        {...column.getResizerProps()}
+                        className={
+                          `resizer ${column.isResizing ? "isResizing" : ""}` +
+                          "bg-blue-700"
+                        }
+                      />
+                    </th>
+                  ))}
+                </tr>
+              ))}
+            </thead>
+            <tbody {...getTableBodyProps()}>
+              {page.map((row) => {
+                prepareRow(row);
+                return (
+                  <tr {...row.getRowProps()}>
+                    {row.cells.map((cell) => {
+                      return (
+                        <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                      );
+                    })}
+                  </tr>
+                );
+              })}
+            </tbody>
+            <button
+              className="btn-md btn-primary"
+              onClick={() => previousPage()}
+            >
+              Previous
+            </button>
+            <button
+              className="btn-md btn-primary ml-2"
+              onClick={() => nextPage()}
+            >
+              Next
+            </button>
+          </table>
+        </div>
       </div>
     </Styles>
   );
