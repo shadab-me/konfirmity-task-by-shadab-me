@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from "react";
+import Controller from "./common/Controller";
 import Header from "./common/Header";
-import Table from "./task/Table";
 import Loader from "./common/Loader";
+import Holdings from "./task/Holdings";
+import Transactions from "./task/Transactions";
+
 function App() {
   const [transactionsData, setTransactions] = useState([]);
-  const fetchHoldings = async () => {
+  const [holdings, setHoldings] = useState([]);
+  const [active, setActive] = useState("holdings");
+
+  const fetchTransactions = async () => {
     let data = await fetch(
       "https://canopy-frontend-task.now.sh/api/transactions"
     );
@@ -12,8 +18,17 @@ function App() {
     setTransactions(transactions);
   };
 
+  const fetchHoldings = async () => {
+    let data = await fetch("https://canopy-frontend-task.now.sh/api/holdings");
+    let { payload } = await data.json();
+    console.log(payload);
+    setHoldings(payload);
+  };
+  <Holdings transactions={holdings} />;
+
   useEffect(() => {
     fetchHoldings();
+    fetchTransactions();
   }, []);
 
   if (!transactionsData.length) {
@@ -23,7 +38,12 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Table transactions={transactionsData} />
+      <Controller setActive={setActive} />
+      {active === "holdings" ? (
+        <Holdings transactions={holdings} />
+      ) : (
+        <Transactions transactions={transactionsData} />
+      )}
     </div>
   );
 }
